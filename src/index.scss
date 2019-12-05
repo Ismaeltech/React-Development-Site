@@ -1,1 +1,14 @@
 @import '~bootstrap/scss/bootstrap';
+
+.bg-dark {
+  background-color: #FC6C24 !important;
+}
+
+.btn-primary {
+  background-color: #FC6C24;
+  border-color: #000000;
+}
+
+.img-back {
+  background-image: url('./img/loboteck-background.png');
+}

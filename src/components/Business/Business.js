@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link, Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import apiUrl from '../../apiConfig.js'
 import axios from 'axios'
 import Layout from '../Header/Layout.js'
@@ -22,15 +22,6 @@ class Business extends Component {
       .catch(console.error)
   }
 
-  onDeleteBusiness = (event) => {
-    axios.delete(`${apiUrl}/businesses/${this.props.match.params.id}`)
-      .then(res => {
-        console.log(res)
-        this.setState({ deleted: true })
-      })
-      .catch(console.error)
-  }
-
   render () {
     const { business, deleted } = this.setState
 
@@ -47,10 +38,7 @@ class Business extends Component {
         <p>Proposal: {business.proposal}</p>
         <p>Deadline: {business.deadline}</p>
         <button onClick={this.onDeleteBusiness}>Delete Profile</button>
-        <Link to={`/businesses/${this.props.match.params.id}/edit`}>
-          <button>Edit</button>
-        </Link>
-        <Link to="/businesses">Back</Link>
+        <button>Edit</button>
       </Layout>
     )
   }

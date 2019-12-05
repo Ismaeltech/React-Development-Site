@@ -42,6 +42,9 @@ class BusinessEdit extends Component {
     axios({
       url: `${apiUrl}/businesses/${this.props.match.params.id}`,
       method: 'PATCH',
+      headers: {
+        'Authorization': `Bearer ${this.props.user.token}`
+      },
       data: { business: this.state.business }
     })
       .then(() => this.setState({ updated: true }))

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Redirect } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 import apiUrl from '../../apiConfig.js'
 // import Layout from '../Header/Layout.js'
@@ -16,7 +16,8 @@ class BusinessCreate extends Component {
         proposal: '',
         deadline: ''
       },
-      createdId: null
+      createdId: null,
+      createdBusiness: null
     }
   }
   handleChange = event => {
@@ -31,38 +32,57 @@ class BusinessCreate extends Component {
   }
   handleSubmit = event => {
     event.preventDefault()
+
+    const { user } = this.props
     axios({
       url: `${apiUrl}/businesses`,
       method: 'POST',
       headers: {
-        'Authorization': `Token token=${this.props.user.token}`
+        'Authorization': `Token token=${user.token}`
       },
       data: {
         business: this.state.business
       }
     })
       .then(res => {
-        this.setState({ createdId: res.data.business.id })
+        this.setState({ createdId: res.data.business._id })
+        axios(`${apiUrl}/businesses/${this.state.createdId}`)
+          .then(res => {
+            this.setState({ createdBusiness: res.data.business })
+          })
+          .catch(console.error)
       })
       .catch(console.error)
   }
-  render () {
-    const { createdId } = this.state
-    // const business = this.state.business
-    // const createdId = this.state.createdId
-    if (createdId) {
-      return <Redirect to={`/businesses/${createdId}`}/>
+  showBiz () {
+    if (this.state.createdBusiness !== null) {
+      console.log(this.state)
+      return (
+        <div>
+          <h1>Most recent business made (User should have only one business at time</h1>
+          <h3>Business Name: {this.state.createdBusiness.name}</h3>
+          <p>Industry: {this.state.createdBusiness.industry}</p>
+          <p>Location: {this.state.createdBusiness.location}</p>
+          <p>Proposal: {this.state.createdBusiness.proposal}</p>
+          <p>Deadline: {this.state.createdBusiness.deadline}</p>
+          <button>Delete Profile</button>
+          <button>Edit</button>
+        </div>
+      )
     }
+  }
+  render () {
     return (
       <div>
-        <h3>Create Business Account</h3>
+        <h3>Create Business Accounttt</h3>
         <BusinessForm
           business={this.state.business}
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
         />
+        {this.showBiz()}
       </div>
     )
   }
 }
-export default BusinessCreate
+export default withRouter(BusinessCreate)

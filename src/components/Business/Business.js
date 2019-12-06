@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
-import { Redirect } from 'react-router-dom'
 import apiUrl from '../../apiConfig.js'
 import axios from 'axios'
-import Layout from '../Header/Layout.js'
 
 class Business extends Component {
-  constructor () {
-    super()
+  constructor (props) {
+    super(props)
 
     this.state = {
       business: null,
@@ -15,31 +13,26 @@ class Business extends Component {
   }
 
   componentDidMount () {
-    axios(`${apiUrl}/businesses/${this.props.match.params.id}`)
+    axios(`${apiUrl}/businesses/${this.props.createdBusiness}`)
       .then(res => {
         this.setState({ business: res.data.business })
+        console.log(this.state)
       })
       .catch(console.error)
   }
 
   render () {
-    const { business, deleted } = this.setState
-
-    if (deleted) {
-      return <Redirect to={
-        { pathname: '/', state: { msg: 'Business succesfully deleted!' } }
-      }/>
-    }
     return (
-      <Layout>
-        <h3>Business Name: {business.name}</h3>
-        <p>Industry: {business.industry}</p>
-        <p>Location: {business.location}</p>
-        <p>Proposal: {business.proposal}</p>
-        <p>Deadline: {business.deadline}</p>
-        <button onClick={this.onDeleteBusiness}>Delete Profile</button>
+      <div>
+        <h1>Most recent business made (User should have only one business at time</h1>
+        <h3>Business Name: {this.state.business.name}</h3>
+        <p>Industry: {this.state.business.industry}</p>
+        <p>Location: {this.state.business.location}</p>
+        <p>Proposal: {this.state.business.proposal}</p>
+        <p>Deadline: {this.state.business.deadline}</p>
+        <button>Delete Profile</button>
         <button>Edit</button>
-      </Layout>
+      </div>
     )
   }
 }

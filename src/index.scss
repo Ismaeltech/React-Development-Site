@@ -1,5 +1,11 @@
 @import '~bootstrap/scss/bootstrap';
 
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+  }
+
 .bg-dark {
   background-color: #FC6C24 !important;
 }
@@ -11,4 +17,74 @@
 
 .img-back {
   background-image: url('./img/loboteck-background.png');
+}
+
+// div {
+//   padding: 10px;
+// }
+
+p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #666666;
+  margin: 0px;
+}
+
+.data {
+  margin-top: 1rem;
+}
+
+.wrap {
+  width: 500px;
+  background: linear-gradient(45deg, #FC6C24, #fff);
+  border-radius: 10px;
+  padding: 72px 55px 65px 55px;
+  position: relative;
+  left: 18rem;
+}
+
+.profile {
+    display: block;
+    font-size: 39px;
+    color: #FC6C24;
+    line-height: 1.2;
+    text-align: center;
+    text-transform: uppercase;
+    padding-bottom: 70px;
+    position: relative;
+    right: 1.3rem;
+}
+
+input {
+    display: block;
+    width: 100%;
+    font-size: 15px;
+    line-height: 1.2;
+    padding: 0 5px;
+}
+
+button {
+    font-size: 16px;
+    color: #555555;
+    line-height: 1.2;
+    text-transform: uppercase;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 15px;
+    min-width: 120px;
+    height: 50px;
+    border-radius: 2px;
+    display: inline;
+    margin-left: 7.5px;
+    margin-top: 1.5rem;
+}
+
+.business {
+  font-size: 25px;
+  color: #fff;
 }

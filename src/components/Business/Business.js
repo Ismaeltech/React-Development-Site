@@ -23,8 +23,8 @@ class Business extends Component {
 
   render () {
     return (
-      <div>
-        <h1>Most recent business made (User should have only one business at time</h1>
+      <div className='wrap'>
+        <h2>Most recent business made</h2>
         <h3>Business Name: {this.state.business.name}</h3>
         <p>Industry: {this.state.business.industry}</p>
         <p>Location: {this.state.business.location}</p>

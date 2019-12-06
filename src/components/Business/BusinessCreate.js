@@ -58,8 +58,8 @@ class BusinessCreate extends Component {
     if (this.state.createdBusiness !== null) {
       console.log(this.state)
       return (
-        <div>
-          <h1>Most recent business made (User should have only one business at time</h1>
+        <div className='data'>
+          <h2>Most recent business made</h2>
           <h3>Business Name: {this.state.createdBusiness.name}</h3>
           <p>Industry: {this.state.createdBusiness.industry}</p>
           <p>Location: {this.state.createdBusiness.location}</p>
@@ -74,7 +74,7 @@ class BusinessCreate extends Component {
   render () {
     return (
       <div>
-        <h3>Create Business Accounttt</h3>
+        <h3 className='profile'>Create Business Profile</h3>
         <BusinessForm
           business={this.state.business}
           handleChange={this.handleChange}

@@ -6,17 +6,18 @@
     box-sizing: border-box;
   }
 
+  body {
+  background: url('./img/loboteckbackground.png')no-repeat center center fixed;
+  background-size: cover;
+  }
+
 .bg-dark {
-  background-color: #FC6C24 !important;
+  background-color: rgba(252, 108, 36, 0) !important;
 }
 
 .btn-primary {
   background-color: #FC6C24;
   border-color: #000000;
-}
-
-.img-back {
-  background-image: url('./img/loboteck-background.png');
 }
 
 // div {
@@ -61,6 +62,8 @@ input {
     font-size: 15px;
     line-height: 1.2;
     padding: 0 5px;
+    border-radius: 5px;
+    padding-bottom: 1rem;
 }
 
 button {
@@ -86,5 +89,38 @@ button {
 
 .business {
   font-size: 25px;
-  color: #fff;
+  color: #000000;
+}
+
+.welcome-p {
+  color: #000000;
+}
+
+.welcome-message {
+  position: relative;
+}
+
+.navbar-dark .navbar-brand {
+  font-size: 2rem;
+  color: #000000;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  font-size: 1.2rem;
+  color: #000000;
+}
+
+.ml-auto, .mx-auto {
+    margin-left: auto !important;
+    position: relative;
+    right: 20.5rem;
+    top: 3rem;
+}
+
+.navbar-expand-md .navbar-collapse {
+    display: flex !important;
+    flex-basis: auto;
+    position: relative;
+    left: 10rem;
+    bottom: 3rem;
 }

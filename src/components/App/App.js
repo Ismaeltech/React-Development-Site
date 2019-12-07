@@ -8,7 +8,7 @@ import SignUp from '../SignUp/SignUp'
 import SignIn from '../SignIn/SignIn'
 import SignOut from '../SignOut/SignOut'
 import ChangePassword from '../ChangePassword/ChangePassword'
-import Home from './Home.js'
+// import Home from './Home.js'
 // import Business from '../Business/Business.js'
 import BusinessCreate from '../Business/BusinessCreate.js'
 
@@ -36,7 +36,7 @@ class App extends Component {
     return (
       <Fragment>
         <Header user={user} />
-        <Home />
+        { /* <Home /> */ }
         {alerts.map((alert, index) => (
           <AutoDismissAlert
             key={index}

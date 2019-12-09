@@ -73,7 +73,7 @@ class BusinessCreate extends Component {
   }
   render () {
     return (
-      <div>
+      <div className='h3-div'>
         <h3 className='profile'>Create Business Profile</h3>
         <BusinessForm
           business={this.state.business}

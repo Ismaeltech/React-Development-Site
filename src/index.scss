@@ -7,17 +7,27 @@
   }
 
   body {
-  background: url('./img/loboteckbackground.png')no-repeat center center fixed;
+  background: url('./img/business-background.jpeg')no-repeat center center fixed;
   background-size: cover;
-  }
+}
+
+.profile-form {
+  position: relative;
+  top: 9rem;
+}
+
+.h3-div {
+  width: 800px;
+  height: auto;
+}
 
 .bg-dark {
   background-color: rgba(252, 108, 36, 0) !important;
 }
 
 .btn-primary {
-  background-color: #FC6C24;
-  border-color: #000000;
+  background-color: #000000;
+  border-color: #fff;
 }
 
 // div {
@@ -25,19 +35,22 @@
 // }
 
 p {
-  font-size: 14px;
+  font-size: 20px;
   line-height: 1.7;
-  color: #666666;
+  color: #000000;
   margin: 0px;
 }
 
 .data {
   margin-top: 1rem;
+  position: relative;
+  top: 9rem;
 }
 
 .wrap {
   width: 500px;
-  background: linear-gradient(45deg, #FC6C24, #fff);
+  background: rgb(252,108,36);
+  background: linear-gradient(278deg, rgba(252,108,36,0.6096813725490196) -1%, rgba(255,255,255,1) 100%);
   border-radius: 10px;
   padding: 72px 55px 65px 55px;
   position: relative;
@@ -45,15 +58,20 @@ p {
 }
 
 .profile {
-    display: block;
     font-size: 39px;
-    color: #FC6C24;
+    color: #000000;
     line-height: 1.2;
     text-align: center;
     text-transform: uppercase;
     padding-bottom: 70px;
     position: relative;
-    right: 1.3rem;
+    top: 3rem;
+    background-color: #EAEBEF;
+    width: 550px;
+    height: auto;
+    border: 3px solid;
+    border-radius: 30px;
+    padding: 2px;
 }
 
 input {
@@ -85,6 +103,9 @@ button {
     display: inline;
     margin-left: 7.5px;
     margin-top: 1.5rem;
+    &:hover {
+      background-color: #000000;
+    }
 }
 
 .business {
@@ -102,7 +123,9 @@ button {
 
 .navbar-dark .navbar-brand {
   font-size: 2rem;
-  color: #000000;
+  color: #fff;
+  position: relative;
+  left: 1.2rem;
 }
 
 .navbar-dark .navbar-nav .nav-link {
@@ -110,17 +133,14 @@ button {
   color: #000000;
 }
 
-.ml-auto, .mx-auto {
-    margin-left: auto !important;
-    position: relative;
-    right: 20.5rem;
-    top: 3rem;
-}
+// .ml-auto, .mx-auto {
+//     margin-left: auto !important;
+//     position: relative;
+//     right: 20.5rem;
+//     top: 3rem;
+// }
 
 .navbar-expand-md .navbar-collapse {
-    display: flex !important;
-    flex-basis: auto;
     position: relative;
-    left: 10rem;
-    bottom: 3rem;
+    right: 2rem;
 }

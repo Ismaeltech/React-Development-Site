@@ -19,8 +19,6 @@ const unauthenticatedOptions = (
 
 const alwaysOptions = (
   <Fragment>
-    <Navbar.Brand href="#"/>
-    <Navbar.Brand href="business"/>
   </Fragment>
 )
 

@@ -61,7 +61,7 @@ class App extends Component {
           )} />
           <AuthenticatedRoute user={user} exact path='/businesses' render={() => (
             <Businesses alert={this.alert} user={user}/>
-          )} />
+          )} gi/>
           <AuthenticatedRoute user={user} path='/businesses/:id' render={() => (
             <Business alert={this.alert} user={user}/>
           )} />

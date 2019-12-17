@@ -34,3 +34,7 @@ Once a user signs up and signs in, the user is able to create a business profile
 ### Planning, process, and problem-solving strategies
 
 The planning process for this application included identifying what I can accomplish in the small time frame allowed. From there the decision to keep it simple by using a one to many relationship was made. The technologies to be used were chosen and the general outline of the application was created. The back end was created first and tested using curl scripts before moving onto the front end. During development, obstacles and challenges were overcome by reasarching the issue using google and StackOverflow. The final technique used to overcome said obstacles and challenges was to meet with an instructor for consulting and guidance.
+
+## Screen Shot
+
+![Screen Shot](https://i.imgur.com/HMqCTFd.png)

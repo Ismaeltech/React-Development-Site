@@ -24,7 +24,6 @@ class Businesses extends Component {
   }
 
   render () {
-    console.log(this.state.businesses)
 
     const businesses = this.state.businesses.map(business => (
       <Link to={`/businesses/${business._id}`} key={business._id}>

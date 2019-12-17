@@ -59,7 +59,6 @@ class BusinessEdit extends Component {
     if (updated) {
       return <Redirect to={'/businesses/'} />
     }
-    console.log(business)
 
     return (
       <Fragment>

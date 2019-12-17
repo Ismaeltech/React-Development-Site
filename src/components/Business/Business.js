@@ -1,57 +1,68 @@
-import React, { useEffect, useState } from 'react'
-import { withRouter, Link } from 'react-router-dom'
+import React from 'react'
+import { Redirect, withRouter } from 'react-router-dom'
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
 
-const Business = props => {
-  const [business, setBusiness] = useState(null)
-  const userId = props.user.id
+class Business extends React.Component {
+  constructor (props) {
+    super(props)
 
-  useEffect(() => {
-    axios({ url: `${apiUrl}/businesses/${props.match.params.id}`,
+    this.state = {
+      business: null,
+      deleted: false
+    }
+  }
+
+  componentDidMount () {
+    axios({
       method: 'GET',
+      url: `${apiUrl}/businesses/${this.props.match.params.id}`,
       headers: {
-        Authorization: `Token token=${props.user.token}`
+        'Authorization': `Token token=${this.props.user.token}`
       }
     })
-      .then(res => setBusiness(res.data.business))
+      .then(responseData => this.setState({ business: responseData.data.business }))
       .catch(console.error)
-  }, [])
+  }
 
-  const handleDelete = event => {
+  destroy = () => {
     axios({
-      url: `${apiUrl}/businesses/${props.match.params.id}`,
+      url: `${apiUrl}/businesses/${this.props.match.params.id}`,
       method: 'DELETE',
       headers: {
-        Authorization: `Token token=${props.user.token}`
+        'Authorization': `Token token=${this.props.user.token}`
       }
     })
-      .then(() => {
-        props.alert({ heading: 'Success', message: 'business deleted ', variant: 'warning' })
-        props.history.push('/businesses')
-      })
+      .then(() => this.setState({ deleted: true }))
+      .catch(console.error)
   }
 
-  if (!business) {
-    return <p>Loading...</p>
-  }
+  render () {
+    const { business, deleted } = this.state
 
-  return (
-    <div>
-      <h4>{business.name}</h4>
-      <h5>Industry: {business.industry}</h5>
-      <h5>Location: {business.location}</h5>
-      <h5>Proposal: {business.proposal}</h5>
-      <h5>Deadline: {business.deadline}</h5>
-      {userId === business.user.id && <button onClick={handleDelete}>Delete</button>}
-      <Link to={`/businesses/${props.match.params.id}/edit`}>
-        <button>Edit</button>
-      </Link>
-      <Link to="/businesses">
-        <button type="text">My Businesses</button>
-      </Link>
-    </div>
-  )
+    if (!business) {
+      return <p>Loading...</p>
+    }
+
+    if (deleted) {
+      return <Redirect to={
+        { pathname: '/businesses', state: { msg: 'Profile succesfully deleted!' } }
+      } />
+    }
+
+    return (
+      <React.Fragment>
+        <div className="one-business">
+          <h4>{business.name}</h4>
+          <h5>Industry: {business.industry}</h5>
+          <h5>Location: {business.location}</h5>
+          <h5>Proposal: {business.proposal}</h5>
+          <h5>Deadline: {business.deadline}</h5>
+          <button onClick={this.destroy}>Delete Business</button>
+        </div>
+      </React.Fragment>
+    )
+  }
 }
 
 export default withRouter(Business)

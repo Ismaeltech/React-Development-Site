@@ -1,63 +1,82 @@
-import React, { useState, useEffect } from 'react'
+import React, { Component, Fragment } from 'react'
 import { Redirect, withRouter } from 'react-router-dom'
 import axios from 'axios'
 
 import apiUrl from '../../apiConfig.js'
 import BusinessForm from './BusinessForm.js'
 
-const BusinessEdit = props => {
-  const [business, setBusiness] = useState({ name: '',
-    industry: '',
-    location: '',
-    proposal: '',
-    deadline: '' })
+class BusinessEdit extends Component {
+  constructor () {
+    super()
 
-  const [edited, setEdited] = useState(false)
-
-  useEffect(() => {
-    axios({
-      url: `${apiUrl}/businesses/${props.match.params.id}`,
-      method: 'GET',
-      headers: {
-        Authorization: `Token token=${props.user.token}`
-      }
-    })
-      .then(res => setBusiness(res.data.business))
-      .catch(console.error)
-  }, [])
-
-  const handleChange = event => {
-    event.persist()
-    setBusiness(business => ({ ...business, [event.target.name]: event.target.value }))
+    this.state = {
+      business: null
+    }
   }
 
-  const handleSubmit = event => {
+  componentDidMount () {
+    axios({
+      url: `${apiUrl}/businesses/${this.props.match.params.id}`,
+      headers: {
+        'Authorization': `Token token=${this.props.user.token}`
+      }
+    })
+      .then(res => this.setState({ business: res.data.business }))
+      .catch(console.error)
+  }
+
+  handleChange = event => {
+    const updatedField = { [event.target.name]: event.target.value }
+
+    const businessEdit = Object.assign(this.state.business, updatedField)
+
+    this.setState({ business: businessEdit })
+  }
+
+  handleSubmit = event => {
     event.preventDefault()
 
     axios({
-      url: `${apiUrl}/businesses/${props.match.params.id}`,
+      url: `${apiUrl}/businesses/${this.props.match.params.id}`,
       method: 'PATCH',
       headers: {
-        Authorization: `Token token=${props.user.token}`
+        'Authorization': `Token token=${this.props.user.token}`
       },
-      data: { business }
+      data: { business: this.state.business }
     })
-      .then(res => setEdited(true))
+      .then((response) => this.setState({ updated: true }))
       .catch(console.error)
   }
 
-  if (edited) {
-    return <Redirect to={`/businesses/${props.match.params.id}`} />
-  }
+  render () {
+    const { updated, business } = this.state
+    const { handleChange, handleSubmit } = this
 
-  return (
-    <BusinessForm
-      business={business}
-      handleChange={handleChange}
-      handleSubmit={handleSubmit}
-      cancelPath={`/businesses/${props.match.params.id}`}
-    />
-  )
+    if (!business) {
+      return <p>Loading...</p>
+    }
+
+    if (updated) {
+      return <Redirect to={'/businesses/'} />
+    }
+    console.log(business)
+
+    return (
+      <Fragment>
+        <h1>Update Business</h1>
+        <BusinessForm
+          name={business.name}
+          industry={business.industry}
+          location={business.location}
+          proposal={business.proposal}
+          deadline={business.deadline}
+          handleSubmit={handleSubmit}
+          handleChange={handleChange}
+          cancelPath={'/businesses'}
+        />
+      </Fragment>
+    )
+  }
 }
 
 export default withRouter(BusinessEdit)

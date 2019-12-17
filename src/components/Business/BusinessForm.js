@@ -1,69 +1,59 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Form from 'react-bootstrap/Form'
-import Col from 'react-bootstrap/Col'
 
-const BusinessForm = ({ business, handleSubmit, handleChange }) => (
-  <Form className='profile-form' onSubmit={handleSubmit}>
-    <Form.Row>
-      <Form.Group as={Col} controlId="formGridName">
-        <Form.Label>Name</Form.Label>
-        <Form.Control
-          placeholder="Business name"
-          value={business.name}
-          name="name"
-          onChange={handleChange}
-          required
-        />
-      </Form.Group>
+const BusinessForm = ({ name, industry, location, proposal, deadline, handleSubmit, handleChange, cancelPath }) => {
+  return (
+    <form className="input" onSubmit={handleSubmit}>
+      <label>Name</label>
+      <input
+        placeholder="Name"
+        value={name}
+        name="name"
+        onChange={handleChange}
+        required
+      />
+      <label>Industry</label>
+      <input
+        placeholder="Industry"
+        value={industry}
+        name="industry"
+        onChange={handleChange}
+        required
+      />
 
-      <Form.Group as={Col} controlId="formGridIndustry">
-        <Form.Label>Industry</Form.Label>
-        <Form.Control
-          placeholder="enter industry"
-          value={business.industry}
-          name="industry"
-          onChange={handleChange}
-        />
-      </Form.Group>
-    </Form.Row>
+      <label>Location</label>
+      <input
+        placeholder="Location"
+        value={location}
+        name="location"
+        onChange={handleChange}
+        required
+      />
 
-    <Form.Row>
-      <Form.Group as={Col} controlId="formGridLocation">
-        <Form.Label>Location</Form.Label>
-        <Form.Control
-          placeholder="enter location"
-          value={business.location}
-          name="location"
-          onChange={handleChange}
-        />
-      </Form.Group>
+      <label>Proposal</label>
+      <textarea
+        placeholder="Proposal"
+        value={proposal}
+        name="proposal"
+        onChange={handleChange}
+        required
+      >
+      </textarea>
 
-      <Form.Group as={Col} controlId="formGridProposal">
-        <Form.Label>Proposal</Form.Label>
-        <Form.Control
-          placeholder="enter proposal"
-          value={business.proposal}
-          name="proposal"
-          onChange={handleChange}
-        />
-      </Form.Group>
+      <label>Deadline</label>
+      <input
+        placeholder="Deadline"
+        value={deadline}
+        name="deadline"
+        onChange={handleChange}
+        required
+      />
 
-      <Form.Group as={Col} controlId="formGridDeadline">
-        <Form.Label>Deadline</Form.Label>
-        <Form.Control
-          placeholder="enter deadline"
-          value={business.deadline}
-          name="deadline"
-          onChange={handleChange}
-        />
-      </Form.Group>
-
-    </Form.Row>
-    <button type="submit">Submit</button>
-    <Link to="/businesses">
-      <button type="text">Cancel</button>
-    </Link>
-  </Form>
-)
+      <button className="button-form" type="submit">Submit</button>
+      <Link to={cancelPath}>
+        <button className="button-form">Cancel</button>
+      </Link>
+    </form>
+  )
+}
 export default BusinessForm

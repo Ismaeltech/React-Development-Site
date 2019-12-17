@@ -61,14 +61,14 @@ class App extends Component {
           )} />
           <AuthenticatedRoute user={user} exact path='/businesses' render={() => (
             <Businesses alert={this.alert} user={user}/>
-          )} gi/>
+          )} />
           <AuthenticatedRoute user={user} path='/businesses/:id' render={() => (
             <Business alert={this.alert} user={user}/>
           )} />
           <AuthenticatedRoute user={user} path='/create-profile' render={() => (
             <BusinessCreate alert={this.alert} user={user} />
           )} />
-          <AuthenticatedRoute user={user} path='/businesses/:id/edit' render={() => (
+          <AuthenticatedRoute user={user} path='/businesses/:id' render={() => (
             <BusinessEdit alert={this.alert} user={user}/>
           )} />
         </main>

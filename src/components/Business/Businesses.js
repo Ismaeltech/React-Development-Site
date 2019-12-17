@@ -1,45 +1,47 @@
-import React, { useEffect, useState } from 'react'
-import ListGroup from 'react-bootstrap/ListGroup'
+import React, { Component, Fragment } from 'react'
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
 import { Link } from 'react-router-dom'
-import Nav from 'react-bootstrap/Nav'
 
-const Businesses = props => {
-  const [businesses, setBusinesses] = useState([])
+class Businesses extends Component {
+  constructor (props) {
+    super(props)
 
-  useEffect(() => {
+    this.state = {
+      businesses: []
+    }
+  }
+
+  componentDidMount () {
     axios({
       url: `${apiUrl}/businesses`,
-      method: 'GET',
       headers: {
-        Authorization: `Token token=${props.user.token}`
+        'Authorization': `Token token=${this.props.user.token}`
       }
     })
-      .then(response => {
-        console.log(response.data)
-        setBusinesses(response.data.businesses)
-      })
-      .then(() => props.alert({ heading: 'Success', message: 'All your businesses', variant: 'success' }))
+      .then(res => this.setState({ businesses: res.data.business }))
       .catch(console.error)
-  }, [])
-  const businessesJsx = businesses.map(business => (
-    <ListGroup.Item key={business.id}>
-      <Nav.Link href={`#create-profile/${business.id}`}>{business.name}</Nav.Link>
-    </ListGroup.Item>
-  ))
+  }
 
-  return (
-    <div>
-      <h1>Business</h1>
-      <Link to="/create-profile"><button>Add New Business</button></Link>
-      <ListGroup variant="flush">
-        <ListGroup.Item action variant="info">
-          {businessesJsx}
-        </ListGroup.Item>
-      </ListGroup>
-    </div>
-  )
+  render () {
+    console.log(this.state.businesses)
+
+    const businesses = this.state.businesses.map(business => (
+      <Link to={`/businesses/${business._id}`} key={business._id}>
+        <button className="businesses">{business.name}: {business.industry}</button>
+      </Link>
+    ))
+
+    return (
+      <Fragment>
+        <h1>Business</h1>
+        <Link to="/create-profile"> Create Business</Link>
+        <div>
+          {businesses}
+        </div>
+      </Fragment>
+    )
+  }
 }
 
 export default Businesses
